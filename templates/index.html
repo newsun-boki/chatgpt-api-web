@@ -7,58 +7,63 @@
   <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Helvetica Neue', sans-serif;
       background-color: #f2f2f2;
+    }
+
+    h1 {
+      font-size: 36px;
+      text-align: center;
+      margin: 30px 0;
     }
 
     #chatbox {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
+      margin: 0 auto;
+      width: 80%;
+      height: 400px;
+      background-color: #fff;
       padding: 20px;
       overflow-y: scroll;
-      height: 400px;
-    }
-
-    .message {
-      padding: 10px;
-      margin: 10px;
       border-radius: 10px;
-      max-width: 80%;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     }
 
-    .user-message {
-      background-color: #80c2ff;
-      color: white;
-      align-self: flex-end;
-    }
-
-    .bot-message {
-      background-color: #f2f2f2;
-      color: black;
-      align-self: flex-start;
-    }
-
-    input[type="text"] {
-      padding: 10px;
+    #chatbox p {
       font-size: 16px;
-      border: none;
-      border-radius: 5px;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    input[type=text] {
       width: 70%;
-      margin-right: 10px;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      text-align: center;
     }
 
     button {
-      padding: 10px;
-      background-color: #80c2ff;
+      width: 30%;
+      background-color: #4CAF50;
       color: white;
-      font-size: 16px;
+      padding: 14px 20px;
+      margin: 8px 0;
       border: none;
-      border-radius: 5px;
+      border-radius: 4px;
       cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    button:active {
+      background-color: #3e8e41;
     }
   </style>
   <script>
@@ -92,8 +97,8 @@
 <body>
   <h1>ChatBot Demo</h1>
   <div id="chatbox"></div>
-  <input type="text" id="message-input">
-  <button onclick="sendMessage()">Send</button>
+  <div style="text-align: center;"><input type="text" id="message-input"></div>
+  <div style="text-align: center;"><button onclick="sendMessage()">Send</button></div>
 </body>
 
 </html>
