@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ChatBot Demo</title>
+  <meta charset="UTF-8">
+  <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    #chatbox {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 20px;
+      overflow-y: scroll;
+      height: 400px;
+    }
+
+    .message {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 10px;
+      max-width: 80%;
+    }
+
+    .user-message {
+      background-color: #80c2ff;
+      color: white;
+      align-self: flex-end;
+    }
+
+    .bot-message {
+      background-color: #f2f2f2;
+      color: black;
+      align-self: flex-start;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      width: 70%;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #80c2ff;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    // 连接到服务器
+    const socket = io.connect('http://localhost:5000');
+
+    // 发送消息到服务器
+    function sendMessage() {
+      const messageInput = document.getElementById('message-input');
+      const message = messageInput.value;
+      if (message) {
+        socket.emit('message', { 'data': message });
+        messageInput.value = '';
+        const chatbox = document.getElementById('chatbox');
+        const userMessage = document.createElement('p');
+        userMessage.innerHTML = 'You: ' + message;
+        chatbox.appendChild(userMessage);
+      }
+    }
+
+    // 接收服务器返回的消息
+    socket.on('message', function(message) {
+      const chatbox = document.getElementById('chatbox');
+      const botMessage = document.createElement('p');
+      botMessage.innerHTML = 'ChatBot: ' + message.data;
+      chatbox.appendChild(botMessage);
+    });
+  </script>
+</head>
+
+<body>
+  <h1>ChatBot Demo</h1>
+  <div id="chatbox"></div>
+  <input type="text" id="message-input">
+  <button onclick="sendMessage()">Send</button>
+</body>
+
+</html>
