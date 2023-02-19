@@ -4,7 +4,7 @@ import openai
 import os
 
 # 将您的OpenAI API 密钥存储在环境变量中
-openai.api_key = "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"
+openai.api_key = "your openai api key"
 
 # 初始化Flask应用程序和SocketIO
 app = Flask(__name__)
